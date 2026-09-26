@@ -12,6 +12,8 @@ class Game:
     def play_game(self):
         print("Welcome to Tic-Tac-Toe! Let's play.")
         self.render()
+        self.get_move()
+        self.render()
 
     def print_board(self):
         b = self.board
@@ -35,6 +37,35 @@ class Game:
     def render(self):
         self.print_board()
         self.print_message()
+
+    def get_move(self):
+        while True:
+            move = input("Enter a valid move (example: A1): ").lower()
+
+            if move in self.board and self.board[move] is None:
+                self.board[move] = self.turn
+                break
+            else:
+                print("Invalid move. Please try again.")
+
+    def check_for_winner(self):
+        b = self.board
+
+        winning_combinations = [
+            ['a1', 'b1', 'c1'],
+            ['a2', 'b2', 'c2'],
+            ['a3', 'b3', 'c3'],
+            ['a1', 'a2', 'a3'],
+            ['b1', 'b2', 'b3'],
+            ['c1', 'c2', 'c3'],
+            ['a1', 'b2', 'c3'],
+            ['c1', 'b2', 'a3']
+        ]
+
+        for combination in winning_combinations:
+            if b[combination[0]] and b[combination[0]] == b[combination[1]] == b[combination[2]]:
+                self.winner = self.turn
+                break
 
 
 game_instance = Game()
