@@ -11,8 +11,14 @@ class Game:
 
     def play_game(self):
         print("Welcome to Tic-Tac-Toe! Let's play.")
-        self.render()
-        self.get_move()
+
+        while not self.winner and not self.tie:
+            self.render()
+            self.get_move()
+            self.check_for_winner()
+            self.check_for_tie()
+            self.switch_turn()
+
         self.render()
 
     def print_board(self):
@@ -66,6 +72,13 @@ class Game:
             if b[combination[0]] and b[combination[0]] == b[combination[1]] == b[combination[2]]:
                 self.winner = self.turn
                 break
+
+    def check_for_tie(self):
+        if all(value is not None for value in self.board.values()) and self.winner is None:
+            self.tie = True
+
+    def switch_turn(self):
+        self.turn = 'O' if self.turn == 'X' else 'X'
 
 
 game_instance = Game()
