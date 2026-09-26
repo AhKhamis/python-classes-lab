@@ -32,6 +32,10 @@ class Game:
         else:
             print(f"It's player {self.turn}'s turn!")
 
+    def render(self):
+        self.print_board()
+        self.print_message()
+
 
 game_instance = Game()
 game_instance.play_game()
